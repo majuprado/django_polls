@@ -1,4 +1,2 @@
 venv/
-*/__pycache__
-polls/migrations/__pycache__/__init__.cpython-39.pyc
-polls/migrations/__pycache__/0001_initial.cpython-39.pyc
+**/__pycache__
