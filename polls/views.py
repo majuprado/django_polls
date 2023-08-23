@@ -28,3 +28,14 @@ def ultimas_perguntas(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'perguntas_recentes.html', context)
+
+def vote(request, question_id):
+    return HttpResponse(f"Você vai votar na pergunta ")
+
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+
+class QuestionCreateView(CreateView):
+    model = Question
+
+    success_url = reverse_lazy('index')
