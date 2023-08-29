@@ -1,6 +1,4 @@
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
-from polls.models import Question
+
 from django.shortcuts import render
 from django.http import HttpResponse
 
