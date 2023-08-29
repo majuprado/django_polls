@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -28,7 +27,7 @@ def exibe_questao(request, question_id):
 def ultimas_perguntas(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
-    return render(request, 'perguntas_recentes.html', context)
+    return render(request, 'polls/perguntas_recentes.html', context)
 
 def vote(request, question_id):
     return HttpResponse(f"Você vai votar na pergunta ")
@@ -41,3 +40,21 @@ class QuestionCreateView(CreateView):
     template_name = 'polls/question_form.html'
     fields = ('question_text', 'pub_date', )
     success_url = reverse_lazy('polls_list')
+    def get_context_data(self, **kwargs):
+        context = super(QuestionCreateView, self).get_context_data(**kwargs)
+        context['form_title'] = 'Criando uma pergunta'
+        return context
+
+
+from django.views.generic.edit import CreateView, UpdateView
+
+class QuestionUpdateView(UpdateView):
+    model = Question
+    template_name = 'polls/question_form.html'
+    fields = ('question_text', 'pub_date', )
+    success_url = reverse_lazy('polls_list')
+    def get_context_data(self, **kwargs):
+        context = super(QuestionUpdateView, self).get_context_data(**kwargs)
+        context['form_title'] = 'Editando a pergunta'
+        return context
+
