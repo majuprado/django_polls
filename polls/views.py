@@ -1,3 +1,6 @@
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from polls.models import Question
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -37,5 +40,6 @@ from django.urls import reverse_lazy
 
 class QuestionCreateView(CreateView):
     model = Question
-
-    success_url = reverse_lazy('index')
+    template_name = 'polls/question_form.html'
+    fields = ('question_text', 'pub_date', )
+    success_url = reverse_lazy('polls_list')

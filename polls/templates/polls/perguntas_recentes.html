@@ -12,4 +12,8 @@
     <p>{{ question.question_text }}</p>
 </article>
 {% endfor %}
+
+<a href="{% url 'poll_add' %}" class="btn btn-lg btn-primary font-weight-bold">
+    + Pergunta
+</a>
 {% endblock %} <!-- fecha o bloco content    -->
