@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -10,7 +11,7 @@ from django.http import HttpResponse
 
 def index(request):
     context = {'titulo': 'Página Principal'}
-    return render(request, 'home.html', context)
+    return render(request, 'polls/home.html', context)
 
 def sobre(request):
     return HttpResponse('Olá este é um app de enquete')
@@ -58,3 +59,7 @@ class QuestionUpdateView(UpdateView):
         context['form_title'] = 'Editando a pergunta'
         return context
 
+class QuestionDeleteView(DeleteView):
+    model = Question
+    template_name = 'polls/question_confirm_delete_form.html'
+    success_url = reverse_lazy('polls_list')
