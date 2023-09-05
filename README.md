@@ -8,6 +8,8 @@ No terminl:
     .\venv\Scripts\activate.bat
     pip install django
 
+     pip install -r requirements.txt
+
 verificar: 
     python manage.py runserver
 

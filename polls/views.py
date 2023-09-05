@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-# Create your views here.
-
+from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from polls.models import Question, Choice
 from django.http import HttpResponse
+from django.views.generic import DetailView, ListView, TemplateView
+
 
 # Create your views here
 
@@ -13,8 +16,8 @@ def index(request):
     context = {'titulo': 'Página Principal'}
     return render(request, 'polls/home.html', context)
 
-def sobre(request):
-    return HttpResponse('Olá este é um app de enquete')
+#def sobre(request):
+   # return HttpResponse('Olá este é um app de enquete')
 
 def exibe_questao(request, question_id):
     questao = Question.objects.get(id=question_id)
@@ -33,8 +36,7 @@ def ultimas_perguntas(request):
 def vote(request, question_id):
     return HttpResponse(f"Você vai votar na pergunta ")
 
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
+
 
 class QuestionCreateView(CreateView):
     model = Question
@@ -46,8 +48,6 @@ class QuestionCreateView(CreateView):
         context['form_title'] = 'Criando uma pergunta'
         return context
 
-
-from django.views.generic.edit import CreateView, UpdateView
 
 class QuestionUpdateView(UpdateView):
     model = Question
@@ -63,3 +63,16 @@ class QuestionDeleteView(DeleteView):
     model = Question
     template_name = 'polls/question_confirm_delete_form.html'
     success_url = reverse_lazy('polls_list')
+
+class QuestionDetailView(DetailView):
+    model = Question
+    template_name = 'polls/question_detail.html'
+    context_object_name = 'question'
+
+class QuestionListView(ListView):
+    model = Question
+    template_name = 'polls/question_list.html'
+    context_object_name = 'questions'
+
+class SobreTemplateView(TemplateView):
+    template_name = 'polls/sobre.html'
