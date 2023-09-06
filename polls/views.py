@@ -76,3 +76,10 @@ class QuestionListView(ListView):
 
 class SobreTemplateView(TemplateView):
     template_name = 'polls/sobre.html'
+
+class QuestionListView(ListView):
+    model = Question
+    template_name = 'polls/question_list.html'
+    context_object_name = 'questions'
+    paginate_by = 2 # quantidade de itens por página
+    ordering = ['-pub_date'] # ordenar pela data de publicação de forma inversão

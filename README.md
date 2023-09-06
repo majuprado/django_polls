@@ -18,3 +18,5 @@ Para cancelar servidor:
 
 Criar 1º app (módulo) Django
     django-admin startapp polls
+
+    alt + shift + f = formatar
