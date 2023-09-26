@@ -9,6 +9,8 @@ from polls.models import Question, Choice
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView, TemplateView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here
@@ -17,8 +19,10 @@ def index(request):
     context = {'titulo': 'Página Principal'}
     return render(request, 'polls/home.html', context)
 
-#def sobre(request):
-   # return HttpResponse('Olá este é um app de enquete')
+@login_required
+
+def sobre(request):
+    return HttpResponse('Olá este é um app de enquete')
 
 def exibe_questao(request, question_id):
     questao = Question.objects.get(id=question_id)
@@ -67,7 +71,7 @@ class QuestionUpdateView(UpdateView):
         messages.success(self.request, self.success_message)
         return super(QuestionUpdateView, self).form_valid(request, *args, **kwargs)
 
-class QuestionDeleteView(DeleteView):
+class QuestionDeleteView(LoginRequiredMixin,DeleteView):
     model = Question
     template_name = 'polls/question_confirm_delete.html'
     success_url = reverse_lazy('polls_all')
@@ -95,3 +99,6 @@ class QuestionListView(ListView):
     context_object_name = 'questions'
     paginate_by = 2 # quantidade de itens por página
     ordering = ['-pub_date'] # ordenar pela data de publicação de forma inversão
+
+    
+     
