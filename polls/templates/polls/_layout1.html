@@ -26,28 +26,34 @@ bg-white border-bottom shadow-sm">
         <a class="p-2 text-dark" href="{% url 'about_page' %}">Sobre</a>
     </div>
 </main>
+{% if not user.is_authenticated %}
+    <li>{{user.name}} <a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a></li>
+    <li><a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></li>
+{% else %}
+    <li><a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a>
+{% endif %}
 {% endblock %}
 {% block main %}
-<div class="container">
-    {% include 'polls/messages.html' %}
-    {% block content %}
-    <p>Conteúdo padrão...</p>
-    {% endblock content %}
-</div>
+    <div class="container">
+        {% include 'polls/messages.html' %}
+        {% block content %}
+        <p>Conteúdo padrão...</p>
+        {% endblock content %}
+    </div>
 {% endblock %}
 {% block footer %}
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted">Rodapé...</span>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">Rodapé...</span>
+        </div>
+    </footer>
 {% endblock %}
 {% block javascript %}
-<!-- Bootstrap JavaScript -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 4/7
 <!-- JS do Projeto -->
-<script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/base.js' %}"></script>
 {% endblock %}

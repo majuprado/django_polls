@@ -71,7 +71,7 @@ class QuestionUpdateView(UpdateView):
         messages.success(self.request, self.success_message)
         return super(QuestionUpdateView, self).form_valid(request, *args, **kwargs)
 
-class QuestionDeleteView(LoginRequiredMixin,DeleteView):
+class QuestionDeleteView(LoginRequiredMixin, DeleteView):
     model = Question
     template_name = 'polls/question_confirm_delete.html'
     success_url = reverse_lazy('polls_all')

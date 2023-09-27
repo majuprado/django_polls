@@ -20,3 +20,6 @@ Criar 1º app (módulo) Django
     django-admin startapp polls
 
     alt + shift + f = formatar
+
+exclui as tabelas do banco de dados:
+    python manage.py migrate contenttypes zero
