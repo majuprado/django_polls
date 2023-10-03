@@ -7,31 +7,26 @@
 {% block main %} <!-- substitui o bloco content em _layout1.html -->
     <h1>Nossas últimas Enquetes</h1>
 {% for question in latest_question_list %}
-    <article>
-        <ul><h2>Em: {{ question.pub_date|date:"d / m / Y" }}</h2></ul>
+
+    <ul><article>
+        <ul><h3>Em: {{ question.pub_date|date:"d / m / Y" }}</h3></ul>
         <br>
-        <li>{{ question.question_text }}</li>
+       
     </article>
-    <ul><a href="{% url 'poll_edit' pk=question.id %}" class="link-secondary">
-        Editar
-        </a></ul>
-    <ul><a href="{% url 'poll_delete' pk=question.id %}" class="link-secondary">
-            Excluir
-    </a></ul>
-
-    <ul><a href="{% url 'poll_show' pk=question.id %}" class="link-secondary">
-        Ver
-    </a></ul>
-    {% if not user.is_authenticated %}
+    <ul><a href="{% url 'poll_edit' pk=question.id %}" class="link-secondary">Editar</a> | 
+        <a href="{% url 'poll_delete' pk=question.id %}" class="link-secondary">Excluir</a> | 
+        <a href="{% url 'poll_show' pk=question.id %}" class="link-secondary">Ver</a> |
+        <a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a></ul>
+    {% if user.is_authenticated %}
     <a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a>
-    <a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a>
+    <ul><a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></ul>
 {% else %}
-    <ul><a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a></ul>
+    <ul><a class="p-2 text-dark" href="{% url 'logout' %}"></a></ul>
 {% endif %}
-    
-{% endfor %}
+    <li>{{ question.question_text }}</li>
+{% endfor %}</ul>
 
-<a href="{% url 'poll_add' %}" class="btn btn-lg btn-primary font-weight-bold">
+<ul><a href="{% url 'poll_add' %}" class="btn btn-lg btn-primary font-weight-bold">
     + Pergunta
-</a>
+</a></ul>
 {% endblock %} <!-- fecha o bloco content    -->
