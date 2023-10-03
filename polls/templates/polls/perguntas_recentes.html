@@ -8,24 +8,25 @@
     <h1>Nossas últimas Enquetes</h1>
 {% for question in latest_question_list %}
     <article>
-        <h2>Em: {{ question.pub_date|date:"d / m / Y" }}</h2>
-        <p>{{ question.question_text }}</p>
+        <ul><h2>Em: {{ question.pub_date|date:"d / m / Y" }}</h2></ul>
+        <br>
+        <li>{{ question.question_text }}</li>
     </article>
-    <a href="{% url 'poll_edit' pk=question.id %}" class="link-secondary">
+    <ul><a href="{% url 'poll_edit' pk=question.id %}" class="link-secondary">
         Editar
-        </a>
-    <a href="{% url 'poll_delete' pk=question.id %}" class="link-secondary">
+        </a></ul>
+    <ul><a href="{% url 'poll_delete' pk=question.id %}" class="link-secondary">
             Excluir
-    </a>
+    </a></ul>
 
-    <a href="{% url 'poll_show' pk=question.id %}" class="link-secondary">
+    <ul><a href="{% url 'poll_show' pk=question.id %}" class="link-secondary">
         Ver
-    </a>
+    </a></ul>
     {% if not user.is_authenticated %}
     <a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a>
     <a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a>
 {% else %}
-    <a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a>
+    <ul><a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a></ul>
 {% endif %}
     
 {% endfor %}
