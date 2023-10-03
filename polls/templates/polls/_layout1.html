@@ -26,12 +26,20 @@ bg-white border-bottom shadow-sm">
         <a class="p-2 text-dark" href="{% url 'about_page' %}">Sobre</a>
     </div>
 </main>
-{% if not user.is_authenticated %}
-    <li>{{user.name}} <a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a></li>
-    <li><a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></li>
+{% if  user.is_authenticated %}
+    <ul> CPF: {{user.cpf}} </ul>
+    <ul>Data de nascimento: {{user.data_nascimento|date:"d/m/Y"}}</ul>
+    <ul>Superuser: {{user.is_superuser}}</ul>
+        
+    <ul>Username: {{user.username}} </ul>
+    <li><a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a></li>
+    
 {% else %}
-    <li><a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a>
+    <li><a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a></li>
+    <li><a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></li>
 {% endif %}
+
+
 {% endblock %}
 {% block main %}
     <div class="container">

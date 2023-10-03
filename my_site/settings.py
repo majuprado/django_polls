@@ -142,8 +142,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/polls/perguntas/list'
-LOGOUT_REDIRECT_URL = '/accounts/signup'
+LOGIN_REDIRECT_URL = '/polls/pergunta/all'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
