@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %} <!-- substitui o bloco content em _layout1.html -->
-    <h1>Nossas últimas Enquetes</h1>
+    <h2>Nossas últimas Enquetes</h2>
 {% for question in latest_question_list %}
 
     <ul><article>
@@ -13,15 +13,14 @@
         <br>
        
     </article>
+    {% if user.is_authenticated %}
     <ul><a href="{% url 'poll_edit' pk=question.id %}" class="link-secondary">Editar</a> | 
         <a href="{% url 'poll_delete' pk=question.id %}" class="link-secondary">Excluir</a> | 
         <a href="{% url 'poll_show' pk=question.id %}" class="link-secondary">Ver</a> |
         <a class="p-2 text-dark" href="{% url 'logout' %}">Sair</a></ul>
-    {% if user.is_authenticated %}
-    <a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a>
-    <ul><a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></ul>
-{% else %}
-    <ul><a class="p-2 text-dark" href="{% url 'logout' %}"></a></ul>
+        {% else %}
+    <ul><a class="p-2 text-dark"  href="{% url 'signup' %}">Cadastrar</a> | <a class="p-2 text-dark" href="{% url 'login' %}">Acessar</a></ul>
+
 {% endif %}
     <li>{{ question.question_text }}</li>
 {% endfor %}</ul>
