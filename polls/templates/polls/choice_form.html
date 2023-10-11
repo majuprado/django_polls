@@ -1,15 +1,15 @@
-(% extends 'polls/_layout1.html' %)
-(% block content% )
+{% extends 'polls/_layout1.html' %}
+{% block content %}
 <div class"card" >
     <div class"card-header">
-        <h5 class "card-title"> {{ form title }} </h5>
+        <h5 class "card-title"> {{ form_title }} </h5>
      </div>
     <div class="card-body">
         <form method="post" >
             {% csrf_token %} 
-            {form.asp } 
+            {{form.as_p }}
             <button type="submit" class="btn btn-success"> Salvar</button> 
         </form>
     </div>  
 </div> 
- {% endblock %}
+{% endblock %}

@@ -16,6 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+
 # Create your views here
 
 def index(request):
@@ -109,19 +110,19 @@ class QuestionListView(ListView):
     paginate_by = 2 # quantidade de itens por página
     ordering = ['-pub_date'] # ordenar pela data de publicação de forma inversão
 
-class ChoiceCreatView(CreateView):
+class ChoiceCreateView(CreateView):
     model = Choice
     template_name = 'polls/choice_form.html'
-    fields = ('choice_text')
+    fields = ('choice_text', )
     success_message = 'Alternativa criada com sucesso!'
 
     def dispatch(self, request, *args, **kwargs):
         self.question = get_object_or_404 (Question, pk = self.kwargs.get ('pk'))
-        return super(ChoiceCreatView, self).dispatch(request, *args, **kwargs)
+        return super(ChoiceCreateView, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         question = get_object_or_404 (Question, pk = self.kwargs.get ('pk'))
-        context = super (ChoiceCreatView, self).get_context_data(**kwargs)
+        context = super (ChoiceCreateView, self).get_context_data(**kwargs)
         context ['form_title'] = f'Alternatva para: {question.question_text}'
 
         return context
@@ -129,7 +130,7 @@ class ChoiceCreatView(CreateView):
     def form_valid(self, form):
         form.instance.question = self.question
         messages.success(self.request, self.success_message)
-        return super(ChoiceCreatView, self).form_valid(form)
+        return super(ChoiceCreateView, self).form_valid(form)
 
     def get_success_url(self, *args, **kwargs):
         question_id = self.kwargs.get('pk')
@@ -144,7 +145,7 @@ class ChoiceUpdateView(UpdateView):
     def get_context_data(self, **kwargs): 
         question = get_object_or_404 (Question, pk = self.object.question.id)
         context = super (ChoiceUpdateView, self).get_context_data(**kwargs) 
-        context['form title'] = 'Editando alternativa' 
+        context['form_title'] = 'Editando alternativa' 
         return context 
     
     def form_valid(self, request, *args, **kwargs): 
@@ -153,7 +154,7 @@ class ChoiceUpdateView(UpdateView):
     
     def get_success_url(self, *args, **kwargs): 
         question_id = self.object.question.id 
-        return reverse_lazy('poll edit', kwargs={'pk': question_id})
+        return reverse_lazy('poll_edit', kwargs={'pk': question_id})
 
 class ChoiceDeleteView(LoginRequiredMixin, DeleteView): 
      model = Choice 
