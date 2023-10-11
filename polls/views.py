@@ -138,7 +138,7 @@ class ChoiceCreateView(CreateView):
     
 class ChoiceUpdateView(UpdateView):
     model = Choice 
-    template_name = 'polls/choice form.html' 
+    template_name = 'polls/choice_form.html' 
     fields = ('choice_text', )  
     success_message = ("Alternativa atualizada com sucesso!")
 
