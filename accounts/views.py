@@ -9,6 +9,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password # para criptografar a senha
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.views.generic import TemplateView
+
+from polls.models import QuestionUser
 
 User = get_user_model() # obtém o model padrão para usuários do Django
 
@@ -26,7 +29,7 @@ class AccountCreateView(CreateView):
         form.save()
         messages.success(self.request, self.success_message)
         return super(AccountCreateView, self).form_valid(form)
-    
+
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'accounts/user_form.html'
@@ -45,3 +48,13 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form): # executa quando os dados estiverem válidos
         messages.success(self.request, self.success_message)
         return super(AccountUpdateView, self).form_valid(form)
+
+class AccountTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/user_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AccountTemplateView, self).get_context_data(**kwargs)
+        voted = QuestionUser.objects.filter(user=self.request.user)
+        context['questions_voted'] = voted
+
+        return context
