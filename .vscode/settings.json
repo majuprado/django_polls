@@ -2,5 +2,23 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "cSpell.words": [
+        "alternativa",
+        "criada",
+        "Criando",
+        "Editando",
+        "exibe",
+        "exibir",
+        "inversão",
+        "itens",
+        "Pergunta",
+        "perguntas",
+        "Questão",
+        "recentes",
+        "registrado",
+        "sobre",
+        "sucesso",
+        "Você"
+    ]
 }
